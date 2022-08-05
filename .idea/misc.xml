@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CheckStyle-IDEA" serialisationVersion="2">
+    <checkstyleVersion>10.3</checkstyleVersion>
+    <scanScope>JavaOnly</scanScope>
+    <copyLibs>true</copyLibs>
+    <option name="thirdPartyClasspath" />
+    <option name="activeLocationIds">
+      <option value="04332bd9-a4c3-4e13-a058-ac2b4a17ca37" />
+    </option>
+    <option name="locations">
+      <list>
+        <ConfigurationLocation id="13d6dd76-b188-490c-8d92-2f18d4d2c7e4" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="43d5f8e6-db91-4c78-bcaf-061f49bc3d15" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
+        <ConfigurationLocation id="04332bd9-a4c3-4e13-a058-ac2b4a17ca37" type="HTTP_URL" scope="All" description="MJT">https://raw.githubusercontent.com/fmi/java-course/master/docs/01-code-analysis-tools/checkstyle/checkstyle.xml</ConfigurationLocation>
+      </list>
+    </option>
+  </component>
+  <component name="PDMPlugin">
+    <option name="skipTestSources" value="false" />
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="17" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>
