@@ -10,12 +10,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class EmployeesRecordsData {
+public class EmployeesRecordsDataImpl implements EmployeesRecordsData {
 
     private static final String DATASET_PATH = "./resources/employees.csv";
     private final Map<Long, List<EmployeeRecord>> employeesRecordsByProject;
 
-    public EmployeesRecordsData() {
+    public EmployeesRecordsDataImpl() {
         try (var reader = new BufferedReader(new FileReader(DATASET_PATH))) {
             employeesRecordsByProject = reader.lines()
                 .map(EmployeeRecord::of)
@@ -29,7 +29,7 @@ public class EmployeesRecordsData {
         return employeesRecordsByProject.keySet();
     }
 
-    public List<EmployeeRecord> getEmployeesRecordsByProjectId (long projectId) {
+    public List<EmployeeRecord> getEmployeesRecordsByProjectId(long projectId) {
         return employeesRecordsByProject.get(projectId);
     }
 

@@ -9,31 +9,33 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class LongerWorkingPeriodServiceImpl implements LargestWorkingPeriodService {
-    private final EmployeesRecordsData repository;
+public class LargestWorkingPeriodServiceImpl implements LargestWorkingPeriodService {
+    private final EmployeesRecordsData recordsData;
 
-    public LongerWorkingPeriodServiceImpl(EmployeesRecordsData repository) {
-        this.repository = repository;
+    public LargestWorkingPeriodServiceImpl(EmployeesRecordsData recordsData) {
+        this.recordsData = recordsData;
     }
 
     public EmployeePairLargestWorkingPeriod findPeriod() {
         EmployeePairLargestWorkingPeriod pair = new EmployeePairLargestWorkingPeriod();
 
-        for (Long projectId : repository.getAllProjectsIds()) {
-            List<EmployeeRecord> records = repository.getEmployeesRecordsByProjectId(projectId);
+        for (Long projectId : recordsData.getAllProjectsIds()) {
+            List<EmployeeRecord> records = recordsData.getEmployeesRecordsByProjectId(projectId);
 
-            for (int first = 0; first < records.size(); ++first) {
-                for (int second = first + 1; second < records.size(); ++second) {
-                    long period = calculateWorkPeriod(records.get(first), records.get(second));
+            for (int firstIndex = 0; firstIndex < records.size(); ++firstIndex) {
+                for (int secondIndex = firstIndex + 1; secondIndex < records.size(); ++secondIndex) {
+                    long period = calculateWorkPeriod(records.get(firstIndex), records.get(secondIndex));
 
                     if (period > pair.getPeriod()) {
                         pair.setPeriod(period);
-                        pair.setFirstEmployeeId(records.get(first).employeeId());
-                        pair.setSecondEmployeeId(records.get(second).employeeId());
+                        pair.setFirstEmployeeId(records.get(firstIndex).employeeId());
+                        pair.setSecondEmployeeId(records.get(secondIndex).employeeId());
                     }
                 }
             }
+
         }
+
         return pair;
     }
 
@@ -45,9 +47,8 @@ public class LongerWorkingPeriodServiceImpl implements LargestWorkingPeriodServi
         LocalDate periodFrom = getLaterDate(firstRecord.dateFrom(), secondRecord.dateFrom());
         LocalDate periodTo = getEarlierDate(firstRecord.dateTo(), secondRecord.dateTo());
 
-        //  The start date is inclusive and end date is exclusive in between(), so adding 1 makes inclusive period.
+        // In the method between() start date is inclusive and end date is exclusive, so adding 1 makes the period inclusive.
         long period = DAYS.between(periodFrom, periodTo) + 1;
-        System.out.println(period);
 
         return (period > 0) ? period : 0;
     }

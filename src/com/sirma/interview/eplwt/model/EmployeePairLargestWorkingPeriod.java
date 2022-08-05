@@ -2,7 +2,7 @@ package com.sirma.interview.eplwt.model;
 
 import java.util.Objects;
 
-public class EmployeePairWorkingPeriod {
+public class EmployeePairLargestWorkingPeriod {
 
     private static final long INVALID_EMPLOYEE_ID = -1;
     private static final long MIN_PERIOD = 0;
@@ -11,16 +11,16 @@ public class EmployeePairWorkingPeriod {
     private long period;
 
     /**
-     * Stores a pair of employees who worked together longer on the same project.
-     *
+     * Stores a pair of employees, who have worked together on common projects for the longest
+     * period of time, and the working period.
      **/
-    public EmployeePairWorkingPeriod() {
+    public EmployeePairLargestWorkingPeriod() {
         this.firstEmployeeId = INVALID_EMPLOYEE_ID;
         this.secondEmployeeId = INVALID_EMPLOYEE_ID;
         this.period = MIN_PERIOD;
     }
 
-    public EmployeePairWorkingPeriod(int firstEmployeeId, int secondEmployeeId, long period) {
+    public EmployeePairLargestWorkingPeriod(int firstEmployeeId, int secondEmployeeId, long period) {
         this.firstEmployeeId = firstEmployeeId;
         this.secondEmployeeId = secondEmployeeId;
         this.period = period;
@@ -53,8 +53,11 @@ public class EmployeePairWorkingPeriod {
     @Override
     public String toString() {
         if (firstEmployeeId == INVALID_EMPLOYEE_ID && secondEmployeeId == INVALID_EMPLOYEE_ID && period == MIN_PERIOD) {
-            return String.format("There is no pair of employees, who have worked together. %d", firstEmployeeId, secondEmployeeId, period);
+            return String.format("There is no pair of employees, who have worked together on common projects. So the " +
+                "the longest period of time is %d", MIN_PERIOD);
+            // return String.format("NULL, NULL, %d", MIN_PERIOD);
         }
+
         return String.format("%d, %d, %d", firstEmployeeId, secondEmployeeId, period);
     }
 
@@ -63,10 +66,10 @@ public class EmployeePairWorkingPeriod {
         if (this == o) {
             return true;
         }
-        if (o == null || getClass() != o.getClass())  {
+        if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        EmployeePairWorkingPeriod that = (EmployeePairWorkingPeriod) o;
+        EmployeePairLargestWorkingPeriod that = (EmployeePairLargestWorkingPeriod) o;
         return firstEmployeeId == that.firstEmployeeId && secondEmployeeId == that.secondEmployeeId &&
             period == that.period;
     }
