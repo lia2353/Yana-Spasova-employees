@@ -1,4 +1,4 @@
-package com.sirma.interview.eplwt;
+package com.sirma.interview.eplwt.ui;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
