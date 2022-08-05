@@ -18,8 +18,14 @@ public class Main {
         LargestWorkingPeriodService service = new LargestWorkingPeriodServiceImpl(dataset);
 
         List<EmployeePairLargestWorkingPeriod> pairs = service.findPairsWithLargestWorkingPeriod();
-        for(EmployeePairLargestWorkingPeriod pair : pairs) {
-            System.out.println(pair.toString());
+
+        if (pairs.isEmpty()) {
+            System.out.println("There are no pairs of employees, who have worked together on common projects. So the " +
+                "the longest period of time is 0");
+        } else {
+            for (EmployeePairLargestWorkingPeriod pair : pairs) {
+                System.out.println(pair.toString());
+            }
         }
 
     }

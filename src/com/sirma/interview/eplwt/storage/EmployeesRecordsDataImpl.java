@@ -14,6 +14,7 @@ public class EmployeesRecordsDataImpl implements EmployeesRecordsData {
     private final Map<Long, List<EmployeeRecord>> employeesRecordsByProject;
 
     public EmployeesRecordsDataImpl(String datasetPath) {
+
         try (var reader = new BufferedReader(new FileReader(datasetPath))) {
             employeesRecordsByProject = reader.lines()
                 .map(EmployeeRecord::of)

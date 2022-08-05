@@ -19,7 +19,7 @@ public class ChooseFileUI {
      *
      * @return filepath
      **/
-    public static String chooseFile () {
+    public static String chooseFile() {
         JFileChooser chooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
         chooser.setDialogTitle(DIALOG_TITLE);
@@ -32,11 +32,10 @@ public class ChooseFileUI {
 
         chooser.setMultiSelectionEnabled(false);
 
-        if (chooser.showDialog(null,APPROVE_BUTTON_NAME) == JFileChooser.APPROVE_OPTION) {
+        if (chooser.showDialog(null, APPROVE_BUTTON_NAME) == JFileChooser.APPROVE_OPTION) {
             File selectedFile = chooser.getSelectedFile();
             return selectedFile.getAbsolutePath();
-        }
-        else {
+        } else {
             return DEFAULT_PATH;
         }
     }
