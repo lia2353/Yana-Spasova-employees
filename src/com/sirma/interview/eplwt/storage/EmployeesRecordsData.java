@@ -9,4 +9,5 @@ public interface EmployeesRecordsData {
     Set<Long> getAllProjectsIds();
 
     List<EmployeeRecord> getEmployeesRecordsByProjectId(long projectId);
+
 }
