@@ -11,12 +11,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class EmployeesRecordsDataImpl implements EmployeesRecordsData {
-
-    private static final String DATASET_PATH = "./resources/employees.csv";
     private final Map<Long, List<EmployeeRecord>> employeesRecordsByProject;
 
-    public EmployeesRecordsDataImpl() {
-        try (var reader = new BufferedReader(new FileReader(DATASET_PATH))) {
+    public EmployeesRecordsDataImpl(String datasetPath) {
+        try (var reader = new BufferedReader(new FileReader(datasetPath))) {
             employeesRecordsByProject = reader.lines()
                 .map(EmployeeRecord::of)
                 .collect(Collectors.groupingBy(EmployeeRecord::projectId));

@@ -9,7 +9,9 @@ import com.sirma.interview.eplwt.storage.EmployeesRecordsDataImpl;
 public class Main {
 
     public static void main(String[] args) {
-        EmployeesRecordsData dataset = new EmployeesRecordsDataImpl();
+        String filePath = ChooseFileUI.chooseFile();
+
+        EmployeesRecordsData dataset = new EmployeesRecordsDataImpl(filePath);
 
         LargestWorkingPeriodService service = new LargestWorkingPeriodServiceImpl(dataset);
 
