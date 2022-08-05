@@ -6,6 +6,8 @@ import com.sirma.interview.eplwt.services.LargestWorkingPeriodServiceImpl;
 import com.sirma.interview.eplwt.storage.EmployeesRecordsData;
 import com.sirma.interview.eplwt.storage.EmployeesRecordsDataImpl;
 
+import java.util.List;
+
 public class Main {
 
     public static void main(String[] args) {
@@ -15,7 +17,10 @@ public class Main {
 
         LargestWorkingPeriodService service = new LargestWorkingPeriodServiceImpl(dataset);
 
-        EmployeePairLargestWorkingPeriod pair = service.findPeriod();
-        System.out.println(pair.toString());
+        List<EmployeePairLargestWorkingPeriod> pairs = service.findPairsWithLargestWorkingPeriod();
+        for(EmployeePairLargestWorkingPeriod pair : pairs) {
+            System.out.println(pair.toString());
+        }
+
     }
 }

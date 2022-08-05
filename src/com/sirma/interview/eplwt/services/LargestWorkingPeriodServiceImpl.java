@@ -5,19 +5,22 @@ import com.sirma.interview.eplwt.model.EmployeeRecord;
 import com.sirma.interview.eplwt.storage.EmployeesRecordsData;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
 public class LargestWorkingPeriodServiceImpl implements LargestWorkingPeriodService {
+    private static final long MIN_PERIOD = 0;
     private final EmployeesRecordsData recordsData;
 
     public LargestWorkingPeriodServiceImpl(EmployeesRecordsData recordsData) {
         this.recordsData = recordsData;
     }
 
-    public EmployeePairLargestWorkingPeriod findPeriod() {
-        EmployeePairLargestWorkingPeriod pair = new EmployeePairLargestWorkingPeriod();
+    public List<EmployeePairLargestWorkingPeriod> findPairsWithLargestWorkingPeriod() {
+        List<EmployeePairLargestWorkingPeriod> pairs = new ArrayList<>();
+        long largestPeriod = MIN_PERIOD;
 
         for (Long projectId : recordsData.getAllProjectsIds()) {
             List<EmployeeRecord> records = recordsData.getEmployeesRecordsByProjectId(projectId);
@@ -26,17 +29,21 @@ public class LargestWorkingPeriodServiceImpl implements LargestWorkingPeriodServ
                 for (int secondIndex = firstIndex + 1; secondIndex < records.size(); ++secondIndex) {
                     long period = calculateWorkPeriod(records.get(firstIndex), records.get(secondIndex));
 
-                    if (period > pair.getPeriod()) {
-                        pair.setPeriod(period);
-                        pair.setFirstEmployeeId(records.get(firstIndex).employeeId());
-                        pair.setSecondEmployeeId(records.get(secondIndex).employeeId());
+                    if (period > MIN_PERIOD && period == largestPeriod) {
+                        pairs.add(new EmployeePairLargestWorkingPeriod(records.get(firstIndex).employeeId(),
+                            records.get(secondIndex).employeeId(), period));
+                    } else if (period > largestPeriod) {
+                        pairs.clear();
+                        largestPeriod = period;
+                        pairs.add(new EmployeePairLargestWorkingPeriod(records.get(firstIndex).employeeId(),
+                            records.get(secondIndex).employeeId(), period));
                     }
                 }
             }
 
         }
 
-        return pair;
+        return pairs;
     }
 
     private long calculateWorkPeriod(EmployeeRecord firstRecord, EmployeeRecord secondRecord) {

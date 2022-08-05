@@ -20,7 +20,7 @@ public class EmployeePairLargestWorkingPeriod {
         this.period = MIN_PERIOD;
     }
 
-    public EmployeePairLargestWorkingPeriod(int firstEmployeeId, int secondEmployeeId, long period) {
+    public EmployeePairLargestWorkingPeriod(long firstEmployeeId, long secondEmployeeId, long period) {
         this.firstEmployeeId = firstEmployeeId;
         this.secondEmployeeId = secondEmployeeId;
         this.period = period;
